@@ -145,76 +145,76 @@ public class InAppWebViewChromeClient extends WebChromeClient implements PluginR
     return Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888);
   }
 
-  @Override
-  public void onHideCustomView() {
-    Activity activity = getActivity();
-    if (activity == null) {
-      return;
-    }
-
-    View decorView = getRootView();
-    if (decorView == null) {
-      return;
-    }
-    if (this.mCustomView != null) {
-      ((FrameLayout) decorView).removeView(this.mCustomView);
-    }
-    this.mCustomView = null;
-    decorView.setSystemUiVisibility(this.mOriginalSystemUiVisibility);
-    activity.setRequestedOrientation(this.mOriginalOrientation);
-    if (this.mCustomViewCallback != null) {
-      this.mCustomViewCallback.onCustomViewHidden();
-    }
-    this.mCustomViewCallback = null;
-    activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
-    if (inAppWebView != null) {
-      WebViewChannelDelegate eventWebViewChannelDelegate = inAppWebView.channelDelegate;
-      if (eventWebViewChannelDelegate != null)
-        eventWebViewChannelDelegate.onExitFullscreen();
-      inAppWebView.setInFullscreen(false);
-    }
-  }
-
-  @Override
-  public void onShowCustomView(final View paramView, final CustomViewCallback paramCustomViewCallback) {
-    if (this.mCustomView != null) {
-      onHideCustomView();
-      return;
-    }
-
-    Activity activity = getActivity();
-    if (activity == null) {
-      return;
-    }
-
-    View decorView = getRootView();
-    if (decorView == null) {
-      return;
-    }
-    this.mCustomView = paramView;
-    this.mOriginalSystemUiVisibility = decorView.getSystemUiVisibility();
-    this.mOriginalOrientation = activity.getRequestedOrientation();
-    this.mCustomViewCallback = paramCustomViewCallback;
-    if (this.mCustomView != null) {
-      this.mCustomView.setBackgroundColor(Color.BLACK);
-    }
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      decorView.setSystemUiVisibility(FULLSCREEN_SYSTEM_UI_VISIBILITY_KITKAT);
-    } else {
-      decorView.setSystemUiVisibility(FULLSCREEN_SYSTEM_UI_VISIBILITY);
-    }
-    activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-    ((FrameLayout) decorView).addView(this.mCustomView, FULLSCREEN_LAYOUT_PARAMS);
-
-    if (inAppWebView != null) {
-      WebViewChannelDelegate eventWebViewChannelDelegate = inAppWebView.channelDelegate;
-      if (eventWebViewChannelDelegate != null)
-        eventWebViewChannelDelegate.onEnterFullscreen();
-      inAppWebView.setInFullscreen(true);
-    }
-  }
+//  @Override
+//  public void onHideCustomView() {
+//    Activity activity = getActivity();
+//    if (activity == null) {
+//      return;
+//    }
+//
+//    View decorView = getRootView();
+//    if (decorView == null) {
+//      return;
+//    }
+//    if (this.mCustomView != null) {
+//      ((FrameLayout) decorView).removeView(this.mCustomView);
+//    }
+//    this.mCustomView = null;
+//    decorView.setSystemUiVisibility(this.mOriginalSystemUiVisibility);
+//    activity.setRequestedOrientation(this.mOriginalOrientation);
+//    if (this.mCustomViewCallback != null) {
+//      this.mCustomViewCallback.onCustomViewHidden();
+//    }
+//    this.mCustomViewCallback = null;
+//    activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+//
+//    if (inAppWebView != null) {
+//      WebViewChannelDelegate eventWebViewChannelDelegate = inAppWebView.channelDelegate;
+//      if (eventWebViewChannelDelegate != null)
+//        eventWebViewChannelDelegate.onExitFullscreen();
+//      inAppWebView.setInFullscreen(false);
+//    }
+//  }
+//
+//  @Override
+//  public void onShowCustomView(final View paramView, final CustomViewCallback paramCustomViewCallback) {
+//    if (this.mCustomView != null) {
+//      onHideCustomView();
+//      return;
+//    }
+//
+//    Activity activity = getActivity();
+//    if (activity == null) {
+//      return;
+//    }
+//
+//    View decorView = getRootView();
+//    if (decorView == null) {
+//      return;
+//    }
+//    this.mCustomView = paramView;
+//    this.mOriginalSystemUiVisibility = decorView.getSystemUiVisibility();
+//    this.mOriginalOrientation = activity.getRequestedOrientation();
+//    this.mCustomViewCallback = paramCustomViewCallback;
+//    if (this.mCustomView != null) {
+//      this.mCustomView.setBackgroundColor(Color.BLACK);
+//    }
+//
+//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//      decorView.setSystemUiVisibility(FULLSCREEN_SYSTEM_UI_VISIBILITY_KITKAT);
+//    } else {
+//      decorView.setSystemUiVisibility(FULLSCREEN_SYSTEM_UI_VISIBILITY);
+//    }
+//    activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+//    ((FrameLayout) decorView).addView(this.mCustomView, FULLSCREEN_LAYOUT_PARAMS);
+//
+//    if (inAppWebView != null) {
+//      WebViewChannelDelegate eventWebViewChannelDelegate = inAppWebView.channelDelegate;
+//      if (eventWebViewChannelDelegate != null)
+//        eventWebViewChannelDelegate.onEnterFullscreen();
+//      inAppWebView.setInFullscreen(true);
+//    }
+//  }
 
   @Override
   public boolean onJsAlert(final WebView view, String url, final String message,
